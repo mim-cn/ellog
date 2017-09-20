@@ -4,10 +4,12 @@ CONFIG -= app_bundle
 CONFIG -= qt
 
 SOURCES += main.cpp \
-    easylogging++.cc
+    easylogging++.cc \
+    ellog.cpp
 
 HEADERS += \
-    easylogging++.h
+    easylogging++.h \
+    ellog.h
 
 INCLUDEPATH += .
 
