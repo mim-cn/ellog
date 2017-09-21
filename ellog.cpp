@@ -1,4 +1,7 @@
 #include "ellog.h"
+INITIALIZE_EASYLOGGINGPP
+
+namespace mim {
 
 bool ellog::log(el::Level lev, const std::string& msg)
 {
@@ -32,4 +35,5 @@ bool ellog::log(el::Level lev, const std::string& msg)
         break;
     }
     return true;
+}
 }
