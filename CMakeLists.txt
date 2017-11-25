@@ -30,7 +30,10 @@ aux_source_directory(../utils/stream DIR_LIB_SRCS)
 ## 指定include 路径
 include_directories(./ ../utils/stream/)
 # 生成动态链接库
-add_library (ellog SHARED ${DIR_LIB_SRCS})
+add_library(ellog SHARED ${DIR_LIB_SRCS})
+add_library(ellog_static STATIC ${DIR_LIB_SRCS})
+set_target_properties(ellog_static PROPERTIES OUTPUT_NAME "ellog")
+set_target_properties(ellog PROPERTIES VERSION 0.1 SOVERSION 1)
 # 生成静态链接库
 #add_library (ellog STATIC ${DIR_LIB_SRCS})
 
