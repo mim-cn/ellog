@@ -1634,6 +1634,24 @@ public:
         }
     }
 
+    static inline unsigned long long timestamp() {
+        struct timeval currTime;
+        gettimeofday(&currTime);
+        time_t t;
+#if ELPP_OS_UNIX
+        t = currTime.tv_sec;
+#else
+#   if ELPP_COMPILER_MSVC
+        ELPP_UNUSED(currTime);
+        _time64(&t);
+#   else
+        // For any other compilers that don't have CRT warnings issue e.g, MinGW or TDM GCC- we use different method
+        t = currTime.tv_sec;
+#   endif  // ELPP_COMPILER_MSVC
+#endif  // ELPP_OS_UNIX
+        return time(&t);
+    }
+
 private:
     static inline struct ::tm* buildTimeInfo(struct timeval* currTime, struct ::tm* timeInfo) {
 #if ELPP_OS_UNIX
@@ -5098,7 +5116,15 @@ public:
                 } else {
                     if (*(s + 1) == base::consts::kFormatSpecifierCharValue) {
                         ++s;
-                        b << value;
+                        if (value == NULL)
+                        {
+                             b << "\033[31mExist NULL Pointer, Will Crash!!!\033[00m";
+                             ELPP_INTERNAL_ERROR("Exist NULL Pointer, Will Crash", true);
+                             //continue;
+                        }
+                        else {
+                             b << value;
+                        }
                         log_(level, vlevel, ++s, args...);
                         return;
                     }

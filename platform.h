@@ -4,16 +4,16 @@
 // address the operating systems
 #if defined(_WIN32) || defined(WIN32)
 #  undef  WIN32
-#  define WIN32
+#  define WIN32   1
 #  undef  _WIN32
-#  define _WIN32
+#  define _WIN32  1
 #endif
 
 #if defined(_WIN64) || defined(WIN64)
 #  undef  WIN64
-#  define WIN64
+#  define WIN64   1
 #  undef  _WIN64
-#  define _WIN64
+#  define _WIN64  1
 #endif
 
 #if defined(WIN64) || defined(WIN32) || defined(_Windows) || defined(__MINGW32__)
@@ -53,40 +53,40 @@
 #endif /* UTIL_CALL */
 
 #if defined(__MINGW32__) || defined(__CYGWIN32__)
-    typedef char               int8;
-    typedef short              int16;
-    typedef long               int32;
-    typedef long long          int64;
-    typedef unsigned char      uint8;
-    typedef unsigned short     uint16;
-    typedef unsigned long      uint32;
-    typedef unsigned long long uint64;
-    typedef uint8              u_char;
+    typedef char               int_8;
+    typedef short              int_16;
+    typedef long               int_32;
+    typedef long long          int_64;
+    typedef unsigned char      uint_8;
+    typedef unsigned short     uint_16;
+    typedef unsigned long      uint_32;
+    typedef unsigned long long uint_64;
+    typedef uint_8              u_char;
 #elif defined(OS_MSWIN)
-    typedef __int8  int8;
-    typedef __int16 int16;
-    typedef __int32 int32;
-    typedef __int64 int64;
+    typedef __int8  int_8;
+    typedef __int16 int_16;
+    typedef __int32 int_32;
+    typedef __int64 int_64;
     typedef unsigned int       uint;
-    typedef unsigned __int8    uint8;
-    typedef unsigned __int16   uint16;
-    typedef unsigned __int32   uint32;
-    typedef unsigned __int64   uint64;
-    typedef uint8              u_char;
+    typedef unsigned __int8    uint_8;
+    typedef unsigned __int16   uint_16;
+    typedef unsigned __int32   uint_32;
+    typedef unsigned __int64   uint_64;
+    typedef uint_8              u_char;
 #elif defined(OS_LINUX)
-    typedef char	             int8;
-    typedef short	             int16;
-    typedef int 	             int32;
-    typedef unsigned char      uint8;
-    typedef unsigned short     uint16;
-    typedef unsigned int       uint32;
+    typedef char	             int_8;
+    typedef short	             int_16;
+    typedef int 	             int_32;
+    typedef unsigned char      uint_8;
+    typedef unsigned short     uint_16;
+    typedef unsigned int       uint_32;
     typedef wchar_t	           WCHAR;
     #if defined(__x86_64)
-        typedef long int64;
-        typedef unsigned long  uint64;
+        typedef long int_64;
+        typedef unsigned long  uint_64;
     #else
-        typedef long long int64;
-        typedef unsigned long long uint64;
+        typedef long long int_64;
+        typedef unsigned long long uint_64;
     #endif
 #endif // OS_LINUX
 

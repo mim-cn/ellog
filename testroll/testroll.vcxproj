@@ -111,12 +111,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="easylogging++.h" />
-    <ClInclude Include="Stream.h" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="..\Stream.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Stream.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

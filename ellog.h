@@ -50,22 +50,36 @@ public:
         {
             el::Configurations idConf;
             defaultformat(idConf);
+            if( "default" != id)
+            {
 #ifdef OS_MSWIN
-            std::string path = filepath + "\\" + id + "_0.log";
+                std::string path = filepath + "\\" + id + ".log";
+                const char* defaultfile = "logs\\myeasylog.log";
 #else
-            std::string path = filepath + "/" + id + "_0.log";
+                std::string path = filepath + "/" + id + ".log";
+                const char* defaultfile = "logs/myeasylog.log";
 #endif
-            idConf.setGlobally(el::ConfigurationType::Filename, path);
-            el::Loggers::reconfigureLogger(id, idConf);
-            //_logger->configure(idConf);
+                idConf.setGlobally(el::ConfigurationType::Filename, path);
+				el::Loggers::reconfigureLogger(id, idConf);
+				//_logger->configure(idConf);
+            }
         }
         // 设置一个日志文件最大字节数 MAX_LOG_FILE_SIZE 10M
         logroll("10485760");
     }
     virtual ~ellog() {}
 public:
+    inline operator const char*() { return (this->_id).c_str(); }
+public:
     static el::base::type::StoragePointer shared();
     static void rolloutHandler(const char* filename, std::size_t size);
+    static void ellog::crashHandler(int sig);
+    static inline int_64 timestamp() { return el::base::utils::DateTime::timestamp(); }
+    static std::string datatime(const char* format = el::base::consts::kDefaultDateTimeFormat) {
+        el::base::MillisecondsWidth msw = el::base::MillisecondsWidth();
+        return el::base::utils::DateTime::getDateTime(format, &msw);
+    }
+public:
     void defaultformat(el::Configurations& idConf);
     void logroll(const std::string& value);
     bool log(el::Level lev, const std::string& msg);
@@ -94,12 +108,14 @@ public:
 	LOGGER_LEVEL_WRITERS_SIGNATURES(trace)
 #   undef LOGGER_LEVEL_WRITERS_SIGNATURES
 
+#define clog(LEVEL, OBJ)    CLOG(LEVEL, OBJ)
+#define clog_if(condition,LEVEL,OBJ) CLOG_IF(condition, LEVEL, OBJ)
 #define LOGGER_COLOR(COLOR, FORMAT) COLOR FORMAT RESET
 
 private:
     el::Configurations  _conf;
-    std::string         _id;
     std::string         _confile;
+    std::string         _id;
     el::Logger*         _logger;
 };
 

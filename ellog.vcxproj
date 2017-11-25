@@ -22,8 +22,8 @@
     <None Include="config.conf" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\utils\stream\Stream.cpp" />
     <ClCompile Include="ellog.cpp" />
+    <ClCompile Include="Stream.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="easylogging++.h" />

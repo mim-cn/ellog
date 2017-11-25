@@ -1,5 +1,5 @@
 #include "../easylogging++.h"  
-#include "Stream.h"  
+#include "../Stream.h"  
 INITIALIZE_EASYLOGGINGPP  
   
 static unsigned int idx;  
